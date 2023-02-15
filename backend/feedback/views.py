@@ -83,7 +83,7 @@ def handleLikesDislikes(request, feedback_id = 0, reply_to_feedback_id=0, int=0)
                 feedback_reply.liked_users.add(user.id)
                 feedback_reply.save()
                 return Response(status=status.HTTP_204_NO_CONTENT)
-            elif int == 2:
+            elif int == 2:      # if dislike
                 if feedback_reply.liked_users.contains(user):   # Check and remove if user already liked post
                     feedback_reply.liked_users.remove(user)
                     feedback_reply.likes -= 1
