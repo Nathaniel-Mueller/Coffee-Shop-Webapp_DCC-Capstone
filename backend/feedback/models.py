@@ -14,6 +14,7 @@ class Feedback(models.Model):
     liked_users = models.ManyToManyField(User, related_name='liked_users')
     disliked_users = models.ManyToManyField(User, related_name='disliked_users')
     is_active = models.BooleanField(default=True)
+    edited_by = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='edited_by', null=True)
     
     
 class FeedbackReply(models.Model):
@@ -27,3 +28,4 @@ class FeedbackReply(models.Model):
     liked_users = models.ManyToManyField(User, related_name='reply_liked_users')
     disliked_users = models.ManyToManyField(User, related_name='reply_disliked_users')
     is_active = models.BooleanField(default=True)
+    edited_by = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='reply_edited_by', null=True)
