@@ -13,6 +13,7 @@ class Feedback(models.Model):
     date_updated = models.DateTimeField(auto_now=True)
     liked_users = models.ManyToManyField(User, related_name='liked_users')
     disliked_users = models.ManyToManyField(User, related_name='disliked_users')
+    is_active = models.BooleanField(default=True)
     
     
 class FeedbackReply(models.Model):
@@ -25,3 +26,4 @@ class FeedbackReply(models.Model):
     date_updated = models.DateTimeField(auto_now=True)
     liked_users = models.ManyToManyField(User, related_name='reply_liked_users')
     disliked_users = models.ManyToManyField(User, related_name='reply_disliked_users')
+    is_active = models.BooleanField(default=True)
