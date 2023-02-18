@@ -10,5 +10,5 @@ class FeedbackSerializer(serializers.ModelSerializer):
 class FeedbackReplySerializer(serializers.ModelSerializer):
     class Meta:
         model = FeedbackReply
-        fields = ['id', 'reply_to_feedback_id', 'user_id', 'user', 'date_created', 'date_updated', 'text', 'likes', 'dislikes']
+        fields = ['id', 'reply_to_feedback', 'user_id', 'user', 'date_created', 'date_updated', 'text', 'likes', 'dislikes']
         depth = 1
