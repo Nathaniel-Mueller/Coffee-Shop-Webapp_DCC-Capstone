@@ -120,3 +120,9 @@ class ChangeUserProfileSerializer(serializers.ModelSerializer):
             pass
         instance.save()
         return instance
+    
+class ViewUserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('email', 'username', 'first_name', 'last_name')
+    

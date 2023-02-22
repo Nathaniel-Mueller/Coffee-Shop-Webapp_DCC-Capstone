@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from .serializers import MyTokenObtainPairSerializer, RegistrationSerializer, ChangeUserProfileSerializer
+from .serializers import MyTokenObtainPairSerializer, RegistrationSerializer, ChangeUserProfileSerializer, ViewUserProfileSerializer
 from rest_framework import generics
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -18,9 +18,13 @@ class RegisterView(generics.CreateAPIView):
 class ChangeUserProfileView(generics.UpdateAPIView):
     
     def get_object(self):
-        return User.objects.get(pk=self.request.user.pk)
-
+        return User.objects.get(id=self.request.user.id)
     permission_classes = (IsAuthenticated,)
     serializer_class = ChangeUserProfileSerializer
     
+class ViewUserProfileView(generics.RetrieveAPIView):
     
+    def get_object(self):
+        return User.objects.get(id=self.request.user.id)
+    serializer_class = ViewUserProfileSerializer
+    permission_classes = (IsAuthenticated,)
