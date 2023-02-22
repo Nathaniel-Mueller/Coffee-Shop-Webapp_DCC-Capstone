@@ -66,8 +66,6 @@ class ChangeUserProfileSerializer(serializers.ModelSerializer):
         try:
             if passwords['newPass'] != passwords['newPassAgain']:
                 raise serializers.ValidationError({'newPass' : 'Password fields didn\'t match'})
-            if not self.context['request'].user.check_password(passwords['oldPass']):
-                raise serializers.ValidationError({'oldPass' : 'Old password is incorrect'})
         except KeyError:
             try:
                 del passwords['newPass']
@@ -86,6 +84,13 @@ class ChangeUserProfileSerializer(serializers.ModelSerializer):
         user = self.context['request'].user
         if User.objects.exclude(id=user.id).filter(username=username).exists():
             raise serializers.ValidationError({'Username' : 'This username is already taken.'})
+        return username
+        
+    def validate_oldPass(self, oldPass):
+        user = self.context['request'].user
+        if not user.check_password(oldPass):
+            raise serializers.ValidationError('That password is not correct.')
+        return oldPass
     
     def update(self, instance, validated_data):
         try:
