@@ -1,0 +1,9 @@
+.redirect{
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    max-width: 800px;
+    margin: auto;
+    margin-top: .5em;
+    font-size: 35px;
+}

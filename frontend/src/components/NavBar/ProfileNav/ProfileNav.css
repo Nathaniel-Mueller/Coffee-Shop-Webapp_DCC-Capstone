@@ -1,0 +1,13 @@
+.item2{
+    height: 100%;
+    position: fixed;
+    opacity: .97;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    background-color: rgb(62, 62, 62);
+    overflow: hidden;
+    transition: 0.5s;
+    box-shadow: -2px 4px 4px rgb(38, 38, 38)
+}

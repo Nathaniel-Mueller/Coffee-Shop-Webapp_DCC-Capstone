@@ -16,6 +16,8 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token["username"] = user.username
         token["first_name"] = user.first_name
         token["last_name"] = user.last_name
+        token['is_staff'] = user.is_staff
+        token['is_superuser'] = user.is_superuser
 
         return token
 
@@ -124,5 +126,5 @@ class ChangeUserProfileSerializer(serializers.ModelSerializer):
 class ViewUserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('email', 'username', 'first_name', 'last_name')
+        fields = ('email', 'username', 'first_name', 'last_name',)
     

@@ -16,6 +16,8 @@ function setUserObject(user) {
     id: user.user_id,
     first_name: user.first_name,
     last_name: user.last_name,
+    is_staff: user.is_staff,
+    is_superuser: user.is_superuser,
   };
 }
 
@@ -59,14 +61,13 @@ export const AuthProvider = ({ children }) => {
         let loggedInUser = jwtDecode(response.data.access);
         setUser(setUserObject(loggedInUser));
         setIsServerError(false);
-        navigate("/");
+        navigate('/');
       } else {
-        navigate("/register");
+        navigate(0);
       }
     } catch (error) {
       console.log(error.response.data);
       setIsServerError(true);
-      navigate("/register");
     }
   };
 
@@ -75,7 +76,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.removeItem("token");
       setUser(null);
       setToken(null);
-      navigate("/");
+      navigate(0);
     }
   };
 

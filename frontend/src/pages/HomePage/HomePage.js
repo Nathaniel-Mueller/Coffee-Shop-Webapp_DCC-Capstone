@@ -11,9 +11,13 @@ const HomePage = () => {
   const [user, token] = useAuth();
 
   return (
+    user? (
     <div className="container">
       <h1>Home Page for {user.username}!</h1>
-    </div>
+    </div> )
+    : (
+      <div>empty</div>
+    )
   );
 };
 

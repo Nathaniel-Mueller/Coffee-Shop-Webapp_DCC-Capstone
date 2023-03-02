@@ -9,9 +9,13 @@ from .serializers import *
 @api_view(['GET', 'POST', 'PUT', 'DELETE'])
 @permission_classes([IsAuthenticatedOrReadOnly])
 def allFeedback(request, pk=0):
-    if request.method == 'GET':
+    if request.method == 'GET' and pk == 0:
         feedback = Feedback.objects.all()
         serializer = FeedbackSerializer(feedback, many = True)
+        return Response(serializer.data)
+    if request.method == 'GET' and pk != 0:
+        feedback = Feedback.objects.filter(pk=pk)
+        serializer=FeedbackSerializer(feedback, many=True)
         return Response(serializer.data)
     if request.method == 'POST':
         serializer = FeedbackSerializer(data=request.data)
@@ -47,9 +51,13 @@ def allFeedback(request, pk=0):
     
 @api_view(['GET', 'POST', 'DELETE', 'PUT'])
 @permission_classes([IsAuthenticatedOrReadOnly])
-def allFeedbackReply(request, feedback_id, pk=0):
-    if request.method == 'GET':
-        feedbackReply = FeedbackReply.objects.filter(reply_to_feedback_id = feedback_id)
+def allFeedbackReply(request, feedback_id=0, pk=0):
+    if request.method == 'GET' and pk == 0:
+        feedbackReply = FeedbackReply.objects.all()
+        serializer = FeedbackReplySerializer(feedbackReply, many = True)
+        return Response(serializer.data)
+    if request.method == 'GET' and pk != 0:
+        feedbackReply = FeedbackReply.objects.filter(pk = pk)
         serializer = FeedbackReplySerializer(feedbackReply, many = True)
         return Response(serializer.data)
     if request.method == 'POST':
