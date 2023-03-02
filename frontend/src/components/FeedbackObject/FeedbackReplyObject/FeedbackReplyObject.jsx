@@ -19,6 +19,7 @@ const FeedbackReplyObject = (props) => {
                          dislikes = {reply.dislikes}
                          id = {reply.id}
                          liked_users = {reply.liked_users}
+                         disliked_users = {reply.disliked_users}
                          from = 'replies'/>
             </ul>
            })}

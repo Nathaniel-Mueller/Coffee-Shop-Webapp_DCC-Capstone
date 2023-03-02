@@ -9,49 +9,54 @@ const LikeButtons = (props) => {
     const [user, token] = useAuth()
     const [like, setLike] = useState('bi-hand-thumbs-up')
     const [dislike, setDislike] = useState('bi-hand-thumbs-down')
-    const [likeCount, setLikeCount] = useState(props.objLikes)
+    const [likeCount, setLikeCount] = useState(props.likes)
     const [dislikeCount, setDislikeCount] = useState(props.dislikes)
-    const [currentPost, setCurrentPost] = useState({})
+    const [likedUsers, setLikedUsers] = useState(props.liked_users)
+    const [dislikedUsers, setDislikedUsers] = useState(props.disliked_users)
 
-    let object = props.tempObject
 
-    async function getCurrentPost() {
-        debugger
-        if (props.from === 'feedback'){
-            setCurrentPost(props.obj)}
-       //     const response = await axios.get(`http://127.0.0.1:8000/api/feedback/${props.id}`)
-       //     setCurrentPost(response.data[0])
-       // }
-       // else if (props.from === 'replies'){
-       //     const response = await axios.get(`http://127.0.0.1:8000/api/feedback/replies/${props.id}`)
-       //     setCurrentPost(response.data[0])
-       // }
+    useEffect(() => {
+        user && checkUser()
+    }, [])
+
+    function checkUser(){
+        if (likedUsers.some((u) => {return u.username === user.username})){
+            setLike('bi-hand-thumbs-up-fill')
+        }
+        if (dislikedUsers.some((u) => {return u.username === user.username})){
+            setDislike('bi-hand-thumbs-down-fill')
+        }
+    }
+    function changeLike(){
+        like === ('bi-hand-thumbs-up') ? 
+            (setLike('bi-hand-thumbs-up-fill')
+            + setLikeCount(likeCount + 1))
+            : (setLike('bi-hand-thumbs-up')
+            + setLikeCount(likeCount - 1))
+        dislike === ('bi-hand-thumbs-down-fill') &&
+            (setDislike('bi-hand-thumbs-down')
+            + setDislikeCount(dislikeCount - 1))
+        
+    }
+    function changeDislike(){
+        dislike === ('bi-hand-thumbs-down') ?
+        (setDislike('bi-hand-thumbs-down-fill')
+        + setDislikeCount(dislikeCount + 1))
+        : (setDislike('bi-hand-thumbs-down')
+        + setDislikeCount(dislikeCount - 1))
+        like === ('bi-hand-thumbs-up-fill') &&
+        (setLike ('bi-hand-thumbs-up')
+        + setLikeCount(likeCount - 1))
     }
 
     async function handleLike(){
-        console.log(object)
-        debugger
-        setCurrentPost(props.obj)
         if (props.from === 'feedback'){
             const response = await axios.put(`http://127.0.0.1:8000/api/feedback/${props.id}/handlereactions/L`, null, {
                 headers: {
                     Authorization: 'Bearer ' + token
                 }
             })
-            like == 'bi-hand-thumbs-up' ? 
-                (setLike('bi-hand-thumbs-up-fill'))
-            :   (setLike('bi-hand-thumbs-up'))
-           console.log(currentPost)
-            if (response.status===204 && !object.liked_users.includes(user)){
-                debugger
-                props.setLikes(object.likes+1)
-                setLikeCount(props.objLikes + 1)
-               // props.setUsers(user)
-            }
-            else if (response.status===204 && props.liked_users.length !==0){
-                props.setLikes(props.objLikes, null)
-                setLikeCount(props.objLikes)
-            }
+            changeLike()
         }
         else if (props.from === 'replies'){
             const response = await axios.put(`http://127.0.0.1:8000/api/feedback/replies/${props.id}/handlereactions/L`, null, {
@@ -59,16 +64,18 @@ const LikeButtons = (props) => {
                     Authorization: 'Bearer ' + token
                 }
             })
+            changeLike()
         }
     }
 
-    async function changeDislike(){
+    async function handleDislike(){
         if (props.from === 'feedback'){
             const response = await axios.put(`http://127.0.0.1:8000/api/feedback/${props.id}/handlereactions/D`, null, {
                 headers: {
                     Authorization: 'Bearer ' + token
                 }
             })
+            changeDislike()
         }
         else if (props.from === 'replies'){
             const response = await axios.put(`http://127.0.0.1:8000/api/feedback/replies/${props.id}/handlereactions/D`, null, {
@@ -76,13 +83,14 @@ const LikeButtons = (props) => {
                     Authorization: 'Bearer ' + token
                 }
             })
+            changeDislike()
         }
     }
 
     return ( 
         <div className='inline'>
             <i className={like} onClick={handleLike}>{likeCount}</i>
-            <i className={dislike} onClick={changeDislike}>{dislikeCount}</i>
+            <i className={dislike} onClick={handleDislike}>{dislikeCount}</i>
         </div>
      );
 }

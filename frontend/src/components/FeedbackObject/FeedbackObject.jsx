@@ -8,10 +8,7 @@ const FeedbackObject = (props) => {
 
     const [feedback, setFeedback] = useState([])
     const [feedbackReplies, setFeedbackReplies] = useState([])
-    const [feedbackLikes, setFeedbackLikes] = useState(0)
-    const [feedbackLikedUsers, setFeedbackLikedUsers] = useState ([])
-    const [object, setObject] = useState({})
-
+    
     async function getFeedback() {
         const response = await axios.get(`http://127.0.0.1:8000/api/feedback/`)
         setFeedback(response.data)
@@ -24,38 +21,21 @@ const FeedbackObject = (props) => {
         getFeedback()
         getFeedbackReplies()
     }, [])
-
+    
     return ( 
         <div>
 
             {feedback.map((obj) => {
-                //debugger
-                function setLikes(likeCount) {
-                    setFeedbackLikes(likeCount)
-                }
-                
-                function setUsers(user) {
-                    let tempUser = [...feedbackLikedUsers, user]
-                    setFeedbackLikedUsers(tempUser)
-                }
-                function setObject(obj) {
-                    setObject(obj)
-                }
                 return (
-                        <ul key={obj.id}
-                            className='container'>
+                    <ul key={obj.id}
+                    className='container'>
                                 <div className='feedback'>
                                     {obj.user.username} says: {obj.text}
-                                    <LikeButtons objLikes = {obj.likes}
-                                                 setCurrent = {setObject}
-                                                 obj = {obj}
-                                                 tempObject = {object}
-                                                 likes = {feedbackLikes}
-                                                 setLikes = {setLikes}
+                                    <LikeButtons likes = {obj.likes}
                                                  dislikes = {obj.dislikes}
                                                  id = {obj.id}
-                                                 liked_users = {feedbackLikedUsers}
-                                                 setUsers = {setUsers}
+                                                 liked_users = {obj.liked_users}
+                                                 disliked_users = {obj.disliked_users}
                                                  from='feedback'/>
                                 </div>
                                 <FeedbackReplyObject feedbackId = {obj.id} feedbackReplies = {feedbackReplies}/> 
