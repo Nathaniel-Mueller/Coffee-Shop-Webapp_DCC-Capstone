@@ -1,9 +1,14 @@
-import React from 'react';
-import LikeButtons from '../../components/FeedbackObject/LikeButtons/LikeButtons';
+import React, { useState, useEffect } from 'react';
+import useAuth from '../../hooks/useAuth';
 
 const EditProfilePage = (props) => {
+
+    const [user, token] = useAuth()
+
     return (
-        <LikeButtons likes = '10' dislikes = '4'/>
+        <div>
+
+        </div>
      );
 }
  

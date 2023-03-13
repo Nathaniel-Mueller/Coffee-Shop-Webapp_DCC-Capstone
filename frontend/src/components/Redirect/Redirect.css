@@ -14,7 +14,7 @@
 }
 
 .redir a:hover{
-    color: rgb(52, 65, 50) !important;
+    color: rgba(158, 123, 15, 0.467) !important;
     transition: 500ms;
     
 }

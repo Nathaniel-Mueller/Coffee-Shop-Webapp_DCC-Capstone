@@ -40,13 +40,13 @@ const LikeButtons = (props) => {
     }
     function changeDislike(){
         dislike === ('bi-hand-thumbs-down') ?
-        (setDislike('bi-hand-thumbs-down-fill')
-        + setDislikeCount(dislikeCount + 1))
-        : (setDislike('bi-hand-thumbs-down')
-        + setDislikeCount(dislikeCount - 1))
+            (setDislike('bi-hand-thumbs-down-fill')
+            + setDislikeCount(dislikeCount + 1))
+            : (setDislike('bi-hand-thumbs-down')
+            + setDislikeCount(dislikeCount - 1))
         like === ('bi-hand-thumbs-up-fill') &&
-        (setLike ('bi-hand-thumbs-up')
-        + setLikeCount(likeCount - 1))
+            (setLike ('bi-hand-thumbs-up')
+            + setLikeCount(likeCount - 1))
     }
 
     async function handleLike(){

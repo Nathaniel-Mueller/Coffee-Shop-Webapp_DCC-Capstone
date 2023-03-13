@@ -61,7 +61,7 @@ def allFeedbackReply(request, feedback_id=0, pk=0):
         serializer = FeedbackReplySerializer(feedbackReply, many = True)
         return Response(serializer.data)
     if request.method == 'POST':
-        check_feedback = Feedback.objects.filter(pk = feedback_id)
+        check_feedback = Feedback.objects.filter(pk = feedback_id)[0]
         if check_feedback.is_active:
             serializer = FeedbackReplySerializer(data=request.data)
             if serializer.is_valid():
@@ -170,18 +170,4 @@ def changeFeedbackIsActive(request, feedback_id):
         feedback.is_active = True
         feedback.save()
         return Response(status=status.HTTP_204_NO_CONTENT)
-        
-
-
-@api_view(['PUT'])
-@permission_classes([IsAdminUser])
-def changeFeedbackReplyIsActive(request, feedback_reply_id):
-    feedback_reply = FeedbackReply.objects.filter(id=feedback_reply_id)[0]
-    if feedback_reply.is_active:
-        feedback_reply.is_active = False
-        feedback_reply.save()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-    elif not feedback_reply.is_active:
-        feedback_reply.is_active = True
-        feedback_reply.save()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    

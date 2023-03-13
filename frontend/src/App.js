@@ -20,6 +20,7 @@ import Footer from "./components/Footer/Footer";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
+import StaffRoute from "./utils/StaffRoute";
 
 function App() {
   return (
@@ -31,11 +32,11 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path='/feedback' element={<FeedbackPage />} />
         <Route path='/menu' element={<MenuPage />} />
-        <Route path='/profile' element={<PrivateRoute> (<ProfilePage />) </PrivateRoute>} />
-        <Route path='/profile/edit' element={<PrivateRoute> (<EditProfilePage />) </PrivateRoute>} />
-        <Route path='/menu/recipes' element={<PrivateRoute> (<RecipesPage />) </PrivateRoute>} />
-        <Route path='/inventory' element={<PrivateRoute> (<OrderingPage />) </PrivateRoute>} />
-        <Route path='/schedule' element={<PrivateRoute> (<SchedulePage />) </PrivateRoute>} />
+        <Route path='/profile' element={<PrivateRoute> <ProfilePage /> </PrivateRoute>} />
+        <Route path='/profile/edit' element={<PrivateRoute> <EditProfilePage /> </PrivateRoute>} />
+        <Route path='/menu/recipes' element={<StaffRoute> <RecipesPage /> </StaffRoute>} />
+        <Route path='/inventory' element={<StaffRoute> <OrderingPage /> </StaffRoute>} />
+        <Route path='/schedule' element={<StaffRoute> <SchedulePage /> </StaffRoute>} />
       </Routes>
       <Footer />
     </div>
