@@ -1,0 +1,42 @@
+.eye-margin{
+    left:6.5em;
+}
+
+.input-width{
+    max-width: 80%;
+}
+
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.margins{
+    margin-top: 5em;
+    margin-bottom: 5em;
+}
+
+.button{
+    margin-top: 1em;
+    margin-left: 12.7em;
+}
+
+.bi-custom {
+    margin-left: 16em;
+}
+
+.h1-margin{
+    margin-bottom: 1em;
+}
+
+.link{
+    margin-bottom: 1.5em;
+    text-align: center;
+    transition: .2s;
+}
+
+.link:hover{
+    cursor: pointer;
+    color: green;
+}

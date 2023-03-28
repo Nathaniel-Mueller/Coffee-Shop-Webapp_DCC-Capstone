@@ -37,25 +37,32 @@ const OrderingPage = (props) => {
         }
     }
 
-    function addItems(i, type){
+    function addItems(i, type, index){
         if (i.trim().length > 0 && (!isNaN(i) || i === '1/2')){
             if (i === '0.5'){
                 i = '1/2'
             }
-            setItemsToOrder([...itemsToOrder, {quantity: i, item: type}])
+            if (itemsToOrder.some(item => item.item === type)){
+                itemsToOrder[index] = {quantity: i, item: type}
+                console.log(itemsToOrder)
+            }
+            else{
+                setItemsToOrder([...itemsToOrder, {quantity: i, item: type}])
+            }
         }
     }
     
     return (
         <div>
+            <h1>Inventory</h1>
             {submitted && <InventoryPopUp />}
-            <form onSubmit={handleSubmit}>
-                <table className="table table-striped table-bordered table-margin">
+            <form onSubmit={handleSubmit} className='table-margin'>
+                <table className="table table-striped table-bordered">
                     <thead>
                         <tr>
                             <th scope="col">Item</th>
                             <th scope="col">Par</th>
-                            <th scope="col">Description</th>
+                            <th scope="col" className='w-50'>Description</th>
                             <th scope="col">Quantity</th>
                         </tr>
                     </thead>
@@ -69,7 +76,7 @@ const OrderingPage = (props) => {
                                         name='wholeMilk'
                                         value={formData.wholeMilk || ''}
                                         onChange={handleInputChange}
-                                        onBlur={() => {addItems(formData.wholeMilk, 'gallon(s) of whole milk')}} />
+                                        onBlur={() => {addItems(formData.wholeMilk, 'gallon(s) of whole milk', 0)}} />
                             </td>
                         </tr>
                         <tr>
@@ -81,7 +88,7 @@ const OrderingPage = (props) => {
                                         name='lowFatMilk'
                                         value={formData.lowFatMilk || ''}
                                         onChange={handleInputChange}
-                                        onBlur={() => {addItems(formData.lowFatMilk, 'gallon(s) of 2% milk')}} />
+                                        onBlur={() => {addItems(formData.lowFatMilk, 'gallon(s) of 2% milk', 1)}} />
                             </td>
                         </tr>
                         <tr>
@@ -93,12 +100,12 @@ const OrderingPage = (props) => {
                                         name='nonFatMilk'
                                         value={formData.nonFatMilk || ''}
                                         onChange={handleInputChange}
-                                        onBlur={() => {addItems(formData.nonFatMilk, 'gallon of nonfat milk')}} />
+                                        onBlur={() => {addItems(formData.nonFatMilk, 'gallon of nonfat milk', 2)}} />
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <button>submit</button>
+                <button className='btn btn-primary align'>submit</button>
             </form>
         </div>
     );

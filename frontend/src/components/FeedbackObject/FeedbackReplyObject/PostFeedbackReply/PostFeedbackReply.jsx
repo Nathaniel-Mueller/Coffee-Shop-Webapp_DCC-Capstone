@@ -24,7 +24,7 @@ const PostFeedbackReply = (props) => {
         user ? 
         (<form onSubmit={handleSubmit}>
             <input type = 'text' value = {postReplyText} onChange={(e) => setPostReplyText(e.target.value)} />
-            <button>Post</button>
+            <button className='btn btn-primary'>Post</button>
         </form>) :
         (<div>
             log in lol

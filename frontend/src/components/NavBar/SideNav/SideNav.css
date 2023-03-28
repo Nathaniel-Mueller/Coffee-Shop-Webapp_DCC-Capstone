@@ -9,6 +9,7 @@
     overflow: hidden;
     transition: 0.5s;
     box-shadow: 2px 4px 4px rgb(38, 38, 38);
+    z-index: 200;
 }
 .links{
     margin-top: 2em;

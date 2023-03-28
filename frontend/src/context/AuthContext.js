@@ -14,6 +14,7 @@ function setUserObject(user) {
   return {
     username: user.username,
     id: user.user_id,
+    email: user.email,
     first_name: user.first_name,
     last_name: user.last_name,
     is_staff: user.is_staff,

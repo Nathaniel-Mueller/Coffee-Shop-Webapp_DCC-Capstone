@@ -8,6 +8,7 @@
 .table-margin{
     margin: auto;
     max-width: 80%;
+    margin-bottom: 3em;
 }
 
 td input{
@@ -25,4 +26,13 @@ td p{
     
     margin-left: 1em;
     font-size: 15px;
+}
+
+h1{
+    text-align: center;
+}
+
+.align{
+    position: absolute;
+    right: 10%;
 }

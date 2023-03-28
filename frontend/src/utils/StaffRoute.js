@@ -3,7 +3,7 @@ import useAuth from "../hooks/useAuth";
 
 const StaffRoute = ({ children }) => {
   const [user] = useAuth();
-  return user.is_staff ? children : <Redirect />;
+  return (user && user.is_staff) ? children : <Redirect />;
 };
 
 export default StaffRoute;

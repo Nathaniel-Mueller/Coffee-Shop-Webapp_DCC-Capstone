@@ -28,7 +28,7 @@ li {
 }
 
 .brand:hover{
-  color:rgba(180, 137, 7, 0.467)
+  color:green
 }
 
 .sidenav-button{
@@ -39,7 +39,7 @@ li {
 
 .sidenav-button:hover{
   cursor: pointer;
-  color: rgba(180, 137, 7, 0.467);
+  color: green;
   transition: .15s;
 }
 
@@ -53,7 +53,7 @@ li {
 
 .profnav-button:hover{
   cursor: pointer;
-  color: rgb(62, 62, 62);
+  color: green;
 }
 
 .login{
@@ -66,5 +66,14 @@ li {
 
 .login:hover{
   cursor: pointer;
-  color: rgba(180, 137, 7, 0.467);
+  color: green;
+}
+
+.overlay{
+  position: absolute;
+  top: 9em;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 195;
 }

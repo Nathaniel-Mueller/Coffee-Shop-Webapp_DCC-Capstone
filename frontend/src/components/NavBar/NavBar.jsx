@@ -17,6 +17,7 @@ const Navbar = () => {
   }
   function closeSideNav (){
     setSideNavWidth('0')
+    
   }
   function openProfileNav () {
     setProfileNavWidth('25%')
@@ -27,6 +28,7 @@ const Navbar = () => {
   return (
     <div className="navBar">
       <ul>
+        {((sideNavWidth !== '0') || (profileNavWidth !== '0')) && <div className='overlay' onClick={() => {closeSideNav(); closeProfileNav()}}></div>}
         <a onClick={() => {openSideNav(); closeProfileNav();}}
            className='sidenav-button'>&#9776;</a>
         <SideNav navWidth = {sideNavWidth} closeSideNav = {closeSideNav}/>

@@ -8,15 +8,16 @@
 
 .feedback{
     border: 3px solid black;
+    border-radius: 15px;
     padding-left: 0%;
     width: 100%;
     margin-bottom: 1em;
     height: 6em;
-    flex-wrap: now;
 }
 
 .reply{
     border: 3px solid gray;
+    border-radius: 15px;
     margin-left: 3em;
     margin-bottom: 1em;
     width: 100%;
