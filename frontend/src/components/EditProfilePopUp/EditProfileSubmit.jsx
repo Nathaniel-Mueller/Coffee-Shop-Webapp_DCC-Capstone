@@ -1,8 +1,8 @@
 import React, { useEffect, useContext } from 'react';
 import AuthContext from '../../context/AuthContext';
-import './EditProfilePopUp.css'
+import './EditProfileSubmit.css'
 
-const EditProfilePopUp = (props) => {
+const EditProfileSubmit = (props) => {
 
     const {logoutUser} = useContext(AuthContext)
 
@@ -24,4 +24,4 @@ const EditProfilePopUp = (props) => {
      );
 }
  
-export default EditProfilePopUp;
+export default EditProfileSubmit;

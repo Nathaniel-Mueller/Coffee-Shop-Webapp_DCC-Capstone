@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useCustomForm from '../../hooks/useCustomForm';
 import useAuth from '../../hooks/useAuth';
-import EditProfilePopUp from '../../components/EditProfilePopUp/EditProfilePopUp';
+import EditProfileSubmit from '../../components/EditProfilePopUp/EditProfileSubmit';
 import axios from 'axios';
 import './EditProfilePage.css'
 
@@ -91,7 +91,7 @@ const EditProfilePage = (props) => {
 
     return (
         <div className='center margins'>
-            {submitted && <EditProfilePopUp />}
+            {submitted && <EditProfileSubmit />}
             <form onSubmit={handleSubmit}>
                 <div className=''>
                     <h1 className='h1-margin'>Edit Your Profile</h1>
