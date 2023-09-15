@@ -65,14 +65,26 @@ const EditProfilePage = (props) => {
         if (formData.email === ''){
             delete formData.email
         }
-        const response = await axios.patch(`http://127.0.0.1:8000/api/auth/profile/edit/`, formData, {
-            headers: {
-                Authorization: 'Bearer ' + token
+        try {
+            const response = await axios.patch(`http://127.0.0.1:8000/api/auth/profile/edit/`, formData, {
+                headers: {
+                    Authorization: 'Bearer ' + token
+                }
+            })
+            console.log (response.status)
+            if (response.status === 200){
+                togglePopUp()
             }
-        })
-        console.log (response.status)
-        if (response.status === 200){
-            togglePopUp()
+        } catch (error) {
+            if (error.response.status === 401){
+                alert('Incorrect Password')
+            }
+            else if (error.response.status === 400){
+                alert ('Those passwords do not match, please try again.')
+            }
+            else {
+                alert('I don\'t know how you got here, but good job I guess? Please refresh the page!')
+            }
         }
 
     }

@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.exceptions import APIException
 from rest_framework.validators import UniqueValidator
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth.password_validation import validate_password
@@ -55,9 +56,14 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
         return user
 
+
+class OldPassValidator(APIException):
+    status_code = 401
+    default_detail = {'Incorrect Password' : 'That password is not correct'}
+
 class ChangeUserProfileSerializer(serializers.ModelSerializer):
-    oldPass = serializers.CharField(write_only = True, required = True, validators = [validate_password])
-    newPass = serializers.CharField(write_only = True, required = False)
+    oldPass = serializers.CharField(write_only = True, required = True)
+    newPass = serializers.CharField(write_only = True, required = False, validators = [validate_password])
     newPassAgain = serializers.CharField(write_only = True, required = False)
     email = serializers.EmailField(required=True)
     
@@ -92,7 +98,7 @@ class ChangeUserProfileSerializer(serializers.ModelSerializer):
     def validate_oldPass(self, oldPass):
         user = self.context['request'].user
         if not user.check_password(oldPass):
-            raise serializers.ValidationError('That password is not correct.')
+            raise OldPassValidator
         return oldPass
     
     def update(self, instance, validated_data):
